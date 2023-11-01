@@ -1,5 +1,6 @@
 import socket
 import threading
+import time
 
 
 # https://realpython.com/python-sockets/
@@ -8,10 +9,11 @@ def main():
     anja = Peer("127.0.0.1", 65432)
     makayla = Peer("127.0.0.1", 65433)
     anja.start()
-    makayla.start()
     makayla.connect("127.0.0.1", 65432)
+
     anja.send_data("hi")
-    
+    print(makayla.connections)
+    print(anja.connections)
 
 class Peer:
 
