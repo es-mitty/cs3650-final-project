@@ -13,7 +13,8 @@ sound = None
 converted_sound = None
 
 cwd = os.getcwd()
-song_path = cwd+"/music/song.mp3"
+song_path = cwd + "/music/song.mp3"
+
 
 def convert(song=song_path):
     sound = AudioSegment.from_mp3(song)
@@ -32,7 +33,6 @@ def convert_to_music(bytes):
     print("Done")
 
 
-
 if __name__ == "__main__":
     music = convert()
     convert_to_music(music)
@@ -40,6 +40,3 @@ if __name__ == "__main__":
         print("They are the same")
     else:
         print("They are not the same")
-
-
-
