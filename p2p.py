@@ -82,7 +82,7 @@ if __name__ == "__main__":
     while(quit_demo != "quit"):
         source = input("Type who you are: ")
         dest = input("Type who you want to send to: ")
-        message = input("Message: ")
+        message = "https://api.thecatapi.com/v1/images/search?api_key=live_pGPtu252IVJfrslX8KvUkqhFOmid15pf8qL7r2PqXiPlnEwYzg7JWGC2MZdwTW4u"
 
         if source == "Anja":
             if dest == "Makayla":
