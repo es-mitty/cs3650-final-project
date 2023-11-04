@@ -1,0 +1,17 @@
+[project]
+name = "Simple_Peer_to_Peer_Network"
+version = "v0.0.alpha"
+description = ""
+authors = [
+    {name = "Eli Smith", email = "Elijah.Smith@uvm.edu"},
+    {name = "Anja Samsom", email = "Anja.Samsom@uvm.edu"},
+    {name = "Makayla Alber", email = "Makayla.Alber@uvm.edu"},
+    {name = "Murphy Peisel", email = "Murphy.Peisel@uvm.edu"}
+]
+dependencies = [
+    "PySide6>=6.6.0",
+]
+requires-python = ">=3.8,<=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
