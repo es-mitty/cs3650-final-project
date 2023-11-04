@@ -9,10 +9,12 @@ class Packet(ABC):
 
     @abstractmethod
     def encode(self):
+        """Return an encoded version of `self.data` that can be sent over a socket."""
         pass
 
     @abstractmethod
     def decode(self):
+        """Should be able to decode whatever the output of encode() produces and store it in `self.data`"""
         pass
 
 
