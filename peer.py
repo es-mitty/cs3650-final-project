@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import socket
 import threading
 
@@ -30,8 +32,16 @@ class Peer:
                 target=self.handle_client, args=(connection, address)
             ).start()
 
-    def send_data(self, data):
-        for connection in self.connections:
+    def send_data(self, data, dest_connection: socket.socket | None = None):
+        if dest_connection is None:
+            for connection in self.connections:
+                try:
+                    connection.sendall(data.encode())
+                except socket.error as e:
+                    print(f"Failed to send data. Error: {e}")
+                    self.connections.remove(connection)
+        else:
+            connection = dest_connection
             try:
                 connection.sendall(data.encode())
             except socket.error as e:
