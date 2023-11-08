@@ -25,19 +25,23 @@ class Packet(ABC):
 
 
 class ConnectionRequestPacket(Packet):
-    pass
+
+    type = PacketType.CONNECTION_REQUEST
 
 
 class ConnectionAcknowledgePacket(Packet):
-    pass
+
+    type = PacketType.CONNECTION_ACK
 
 
 class MessagePacket(Packet):
-    pass
+    
+    type = PacketType.MESSAGE
 
 
 class UserReportPacket(Packet):
-    pass
+     
+    type = PacketType.REPORT
 
 
 class RawPacketDecoder:
