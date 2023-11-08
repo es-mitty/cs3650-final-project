@@ -9,16 +9,16 @@ def main():
     eli_port = 8002
     murphy_port = 8003
 
-    Anja = Peer("0.0.0.0", 8000)
+    Anja = Peer("0.0.0.0", anja_port)
     Anja.start()
 
-    Makayla = Peer("0.0.0.0", 8001)
+    Makayla = Peer("0.0.0.0", makayla_port)
     Makayla.start()
 
-    Eli = Peer("0.0.0.0", 8002)
+    Eli = Peer("0.0.0.0", eli_port)
     Eli.start()
 
-    Murphy = Peer("0.0.0.0", 8003)
+    Murphy = Peer("0.0.0.0", murphy_port)
     Murphy.start()
 
     time.sleep(2)
