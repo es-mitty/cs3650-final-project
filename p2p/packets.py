@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any
 
-
 class Packet(ABC):
     def __init__(self, data: dict[str, Any]):
         self.data = data
@@ -13,8 +12,8 @@ class Packet(ABC):
         pass
 
     @abstractmethod
-    def decode(self):
-        """Should be able to decode whatever the output of encode() produces and store it in `self.data`"""
+    @property
+    def data(self) -> dict:
         pass
 
 
@@ -32,3 +31,9 @@ class MessagePacket(Packet):
 
 class UserReportPacket(Packet):
     pass
+
+
+class RawPacketDecoder:
+    @staticmethod
+    def decode_raw_packet() -> Packet:
+        pass
