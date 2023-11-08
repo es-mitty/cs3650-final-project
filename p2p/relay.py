@@ -28,7 +28,7 @@ class Relay(Peer):
         self.connections.remove(connection)
         connection.close()
 
-    def route_packet(self, decoded_packet, connection):
+    def route_packet(self, packet, connection):
         pass
 
     def set_recv_callback(self, callback: Callable):
