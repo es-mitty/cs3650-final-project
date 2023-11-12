@@ -19,7 +19,7 @@ class Relay(Peer):
                 raw_data = connection.recv(1024)
                 if not raw_data:
                     break
-                decoded_packet = RawPacketDecoder.decode_raw_packet(raw_data)
+                decoded_packet = packet_factory(raw_data)
                 self.route_packet(decoded_packet, connection)
             except socket.error:
                 break
