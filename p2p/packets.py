@@ -25,11 +25,13 @@ class Packet(ABC):
             self.source_address = from_bytes[0:4]
             self.destination_address = from_bytes[4:8]
 
+    @property
+    def header_bytes(self):
+        return bytearray(bytearray([self.type.value]) + self.source_address + self.destination_address)
 
     @abstractmethod
-    def encode(self, payload) -> bytearray:
+    def encode(self) -> bytearray:
         """Return an encoded version of `self.data` that can be sent over a socket."""
-        return bytearray(bytearray([self.type.value]) + self.source_address + self.destination_address + payload)
 
 
 class ConnectionRequestPacket(Packet):
@@ -54,13 +56,18 @@ class MessagePacket(Packet):
             self._data = from_bytes[8:]
         else:
             super().__init__()
+            self._data = bytearray([])
 
     @property
     def data(self):
         try:
-            return json.loads(self._data.decode('utf-8'))
+            json_string = self._data.decode('utf-8')
+            return json.loads(json_string)
         except:
             return {}
+  
+    def encode(self) -> bytearray:
+        return bytearray(self.header_bytes + self._data)
 
 
 class UserReportPacket(Packet):
