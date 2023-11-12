@@ -1,7 +1,7 @@
 from peer import Peer
 from typing import Callable
 import socket
-from packets import *
+from packets import packet_factory, UserReportPacket, ConnectionRequestPacket, ConnectionAcknowledgePacket, MessagePacket
 
 
 class Relay(Peer):
