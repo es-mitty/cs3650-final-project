@@ -27,9 +27,9 @@ class Packet(ABC):
 
 
     @abstractmethod
-    def encode(self) -> bytearray:
+    def encode(self, payload) -> bytearray:
         """Return an encoded version of `self.data` that can be sent over a socket."""
-        pass
+        return bytearray(bytearray([self.type.value]) + self.source_address + self.destination_address + payload)
 
 
 class ConnectionRequestPacket(Packet):
