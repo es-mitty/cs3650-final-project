@@ -24,6 +24,9 @@ class Packet(ABC):
             assert len(from_bytes) >= 8
             self.source_address = from_bytes[0:4]
             self.destination_address = from_bytes[4:8]
+        else:
+            self.source_address = bytearray(4)
+            self.destination_address = bytearray(4)
 
     @property
     def header_bytes(self):
