@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any, Callable
 from enum import Enum
-
+import json
 
 class PacketType(Enum):
     CONNECTION_REQUEST = 0xC
@@ -45,6 +45,22 @@ class ConnectionAcknowledgePacket(Packet):
 class MessagePacket(Packet):
     
     type = PacketType.MESSAGE
+
+    def __init__(self, from_bytes: bytearray | None = None):
+        if from_bytes:
+            super().__init__(from_bytes)
+
+            assert len(from_bytes) > 8
+            self._data = from_bytes[8:]
+        else:
+            super().__init__()
+
+    @property
+    def data(self):
+        try:
+            return json.loads(self._data.decode('utf-8'))
+        except:
+            return {}
 
 
 class UserReportPacket(Packet):
