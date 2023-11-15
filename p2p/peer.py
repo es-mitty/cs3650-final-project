@@ -11,7 +11,7 @@ class Peer:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.connections: set = {}
+        self.connections: set = set()
 
     def connect(self, peer_host, peer_port):
         connection = socket.create_connection((peer_host, peer_port))
