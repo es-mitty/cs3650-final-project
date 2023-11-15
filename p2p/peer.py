@@ -7,16 +7,16 @@ import threading
 
 
 class Peer:
-    def __init__(self, host, port):
+    def __init__(self, host, port) -> None:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.connections = []
+        self.connections: set = {}
 
     def connect(self, peer_host, peer_port):
         connection = socket.create_connection((peer_host, peer_port))
         if connection not in self.connections:
-            self.connections.append(connection)
+            self.connections.add(connection)
             print(f"Connected to {peer_host}:{peer_port}")
 
     def listen(self):
@@ -26,7 +26,7 @@ class Peer:
 
         while True:
             connection, address = self.socket.accept()
-            self.connections.append(connection)
+            self.connections.add(connection)
             print(f"Accepted connection from {address}")
             threading.Thread(
                 target=self.handle_client, args=(connection, address)
