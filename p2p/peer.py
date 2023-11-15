@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import socket
+from socket import socket as SocketObject
 import threading
 
 # source for demo is https://medium.com/@luishrsoares/implementing-peer-to-peer-data-exchange-in-python-8e69513489af
@@ -11,11 +12,12 @@ class Peer:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.connections: set = set()
+        self.connections: set[SocketObject] = set()
 
     def connect(self, peer_host, peer_port):
-        connection = socket.create_connection((peer_host, peer_port))
-        if connection not in self.connections:
+        
+        if (peer_host, peer_port) not in [connection.getpeername() for connection in self.connections]:
+            connection = socket.create_connection((peer_host, peer_port))
             self.connections.add(connection)
             print(f"Connected to {peer_host}:{peer_port}")
 
