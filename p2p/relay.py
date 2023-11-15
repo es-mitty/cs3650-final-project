@@ -1,7 +1,7 @@
 from peer import Peer
 from typing import Callable
 import socket
-from socket import socket as SocketClass
+from socket import socket as SocketObject
 from packets import packet_factory, UserReportPacket, ConnectionRequestPacket, ConnectionAcknowledgePacket, MessagePacket
 
 
@@ -13,7 +13,7 @@ class Relay(Peer):
     def __init__(self, host, port):
         super().__init__(host, port)
 
-    def handle_client(self, connection: SocketClass, address):
+    def handle_client(self, connection: SocketObject, address):
         """Plan to override to handle relay stuff."""
         while True:
             try:

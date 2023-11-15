@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import socket
 import threading
+from socket import socket as SocketObject
 
 # source for demo is https://medium.com/@luishrsoares/implementing-peer-to-peer-data-exchange-in-python-8e69513489af
 
@@ -14,7 +15,7 @@ class Peer:
         self.connections = []
 
     def connect(self, peer_host, peer_port):
-        connection = socket.create_connection((peer_host, peer_port))
+        connection: SocketObject = socket.create_connection((peer_host, peer_port))
 
         self.connections.append(connection)
         print(f"Connected to {peer_host}:{peer_port}")
