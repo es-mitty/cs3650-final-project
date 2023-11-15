@@ -15,25 +15,25 @@ class PacketType(Enum):
 @dataclass
 class Packet(ABC):
 
-    source_address: bytearray
-    destination_address: bytearray
+    source_address: bytes
+    destination_address: bytes
     type: PacketType
 
-    def __init__(self, from_bytes: bytearray | None = None):
+    def __init__(self, from_bytes: bytes | None = None):
         if from_bytes:
             assert len(from_bytes) >= 8
             self.source_address = from_bytes[0:4]
             self.destination_address = from_bytes[4:8]
         else:
-            self.source_address = bytearray(4)
-            self.destination_address = bytearray(4)
+            self.source_address = bytes(4)
+            self.destination_address = bytes(4)
 
     @property
     def header_bytes(self):
-        return bytearray(bytearray([self.type.value]) + self.source_address + self.destination_address)
+        return bytes(bytes([self.type.value]) + self.source_address + self.destination_address)
 
     @abstractmethod
-    def encode(self) -> bytearray:
+    def encode(self) -> bytes:
         """Return an encoded version of `self.data` that can be sent over a socket."""
 
 
@@ -51,7 +51,7 @@ class MessagePacket(Packet):
     
     type = PacketType.MESSAGE
 
-    def __init__(self, from_bytes: bytearray | None = None):
+    def __init__(self, from_bytes: bytes | None = None):
         if from_bytes:
             super().__init__(from_bytes)
 
@@ -59,7 +59,7 @@ class MessagePacket(Packet):
             self._data = from_bytes[8:]
         else:
             super().__init__()
-            self._data = bytearray([])
+            self._data = bytes([])
 
     @property
     def data(self):
@@ -69,8 +69,8 @@ class MessagePacket(Packet):
         except:
             return {}
   
-    def encode(self) -> bytearray:
-        return bytearray(self.header_bytes + self._data)
+    def encode(self) -> bytes:
+        return bytes(self.header_bytes + self._data)
 
 
 class UserReportPacket(Packet):
@@ -78,7 +78,7 @@ class UserReportPacket(Packet):
     type = PacketType.REPORT
 
 
-def packet_factory(from_bytes: bytearray) -> Packet:
+def packet_factory(from_bytes: bytes) -> Packet:
     """Given some decoded bytes from a TCP packet, return the appropriate data structure with decoded data."""
     CLASS_MAP: dict[PacketType, Callable] = {
             PacketType.CONNECTION_REQUEST: ConnectionRequestPacket,
