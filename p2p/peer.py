@@ -8,14 +8,14 @@ from socket import socket as SocketObject
 
 
 class Peer:
-    def __init__(self, host, port):
+    def __init__(self, host, port) -> None:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.connections = []
+        self.connections: list[SocketObject] = []
 
     def connect(self, peer_host, peer_port):
-        connection: SocketObject = socket.create_connection((peer_host, peer_port))
+        connection = socket.create_connection((peer_host, peer_port))
 
         self.connections.append(connection)
         print(f"Connected to {peer_host}:{peer_port}")
