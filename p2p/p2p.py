@@ -4,10 +4,13 @@ from peer import Peer
 
 
 def main():
-    anja_port = 8000
-    makayla_port = 8001
-    eli_port = 8002
-    murphy_port = 8003
+    IPV4_ADDR = "0.0.0.0"
+    ports = {
+        "Anja": 8000,
+        "Makayla": 8001,
+        "Eli": 8002,
+        "Murphy": 8003,
+    }
 
     Anja = Peer("0.0.0.0", 8000)
     Anja.start()
