@@ -15,3 +15,8 @@ requires-python = ">=3.8,<=3.11"
 readme = "README.md"
 license = {text = "MIT"}
 
+[tool.pdm.scripts]
+start = "python p2p/p2p.py"
+
+[tool.setuptools]
+py-modules = ["p2p"]
