@@ -12,8 +12,11 @@ class Peer:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.socket.settimeout(2)
         self.connections: set[SocketObject] = set()
-
+        self.listening = threading.Event()
+        self.listening.clear()
+    
     def connect(self, peer_host, peer_port):
         if (peer_host, peer_port) not in [
             connection.getpeername() for connection in self.connections
@@ -28,13 +31,17 @@ class Peer:
         self.socket.listen(10)
         print(f"Listening for connections on {self.host}:{self.port}")
 
-        while True:
-            connection, address = self.socket.accept()
-            self.connections.add(connection)
-            print(f"Accepted connection from {address}")
-            threading.Thread(
-                target=self.handle_client, args=(connection, address)
-            ).start()
+        while self.listening.is_set():
+            try:
+                connection, address = self.socket.accept()
+                self.connections.add(connection)
+                print(f"Accepted connection from {address}")
+                handler_thread = threading.Thread(
+                    target=self.handle_client, args=(connection, address)
+                )
+                handler_thread.start()
+            except TimeoutError:
+                pass
 
     def send_data(self, data, dest_connection: socket.socket | None = None):
         if dest_connection is None:
@@ -53,13 +60,13 @@ class Peer:
                 self.connections.remove(connection)
 
     def handle_client(self, connection, address):
-        while True:
+        while self.listening.is_set():
             try:
                 data = connection.recv(1024)
                 if not data:
                     break
                 print(f"Received data from {address}: {data.decode()}")
-            except socket.error:
+            except:
                 break
 
         print(f"Connection from {address} closed.")
@@ -68,7 +75,8 @@ class Peer:
 
     def start(self):
         listen_thread = threading.Thread(target=self.listen)
+        self.listening.set()
         listen_thread.start()
 
     def stop(self):
-        pass
+        self.listening.clear()

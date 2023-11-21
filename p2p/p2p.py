@@ -43,7 +43,7 @@ def main() -> None:
 
     for key, user in users.items():
         user["peer"].stop()
-        print("Stopped {key}.")
+        print(f"Stopping peer: {key}")
 
 if __name__ == "__main__":
     main()
