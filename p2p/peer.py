@@ -69,3 +69,6 @@ class Peer:
     def start(self):
         listen_thread = threading.Thread(target=self.listen)
         listen_thread.start()
+
+    def stop(self):
+        pass

@@ -41,6 +41,9 @@ def main() -> None:
 
         quit_demo = input("Type quit to quit the demo or anything else to continue: ")
 
+    for key, user in users.items():
+        user["peer"].stop()
+        print("Stopped {key}.")
 
 if __name__ == "__main__":
     main()
