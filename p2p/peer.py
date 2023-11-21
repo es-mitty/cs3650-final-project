@@ -15,8 +15,9 @@ class Peer:
         self.connections: set[SocketObject] = set()
 
     def connect(self, peer_host, peer_port):
-        
-        if (peer_host, peer_port) not in [connection.getpeername() for connection in self.connections]:
+        if (peer_host, peer_port) not in [
+            connection.getpeername() for connection in self.connections
+        ]:
             connection = socket.create_connection((peer_host, peer_port))
             self.connections.add(connection)
             print(f"Connected to {peer_host}:{peer_port}")

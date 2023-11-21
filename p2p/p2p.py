@@ -5,11 +5,11 @@ from peer import Peer
 
 def main():
     IPV4_ADDR = "0.0.0.0"
-    ports = {
-        "Anja": 8000,
-        "Makayla": 8001,
-        "Eli": 8002,
-        "Murphy": 8003,
+    users = {
+        "Anja": {"port": 8000, "peer": None},
+        "Makayla": {"port": 8001, "peer": None},
+        "Eli": {"port": 8002, "peer": None},
+        "Murphy": {"port": 8003, "peer": None},
     }
 
     Anja = Peer("0.0.0.0", 8000)
