@@ -12,7 +12,7 @@ class Peer:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.socket.settimeout(2)
+        self.socket.settimeout(0.5)
         self.connections: set[SocketObject] = set()
         self.listening = threading.Event()
         self.listening.clear()

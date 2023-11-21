@@ -24,7 +24,7 @@ def main() -> None:
         peer.start()
         users[user]["peer"] = peer
 
-    time.sleep(1)
+    time.sleep(0.5)
 
     quit_demo = "continue"
     while quit_demo != "quit":
@@ -35,9 +35,9 @@ def main() -> None:
         if source in users and dest in users:
             source_peer: Peer = users[source]["peer"]
             connection  = source_peer.connect(CONNECTION_IPV4_ADD, users[dest]["port"])
-            time.sleep(1)
+            time.sleep(0.5)
             source_peer.send_data(message, connection)
-            time.sleep(1)
+            time.sleep(0.5)
 
         quit_demo = input("Type quit to quit the demo or anything else to continue: ")
 
