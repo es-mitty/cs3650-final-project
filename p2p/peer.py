@@ -21,6 +21,7 @@ class Peer:
             connection = socket.create_connection((peer_host, peer_port))
             self.connections.add(connection)
             print(f"Connected to {peer_host}:{peer_port}")
+            return connection
 
     def listen(self):
         self.socket.bind((self.host, self.port))
