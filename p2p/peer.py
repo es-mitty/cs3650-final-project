@@ -18,13 +18,16 @@ class Peer:
         self.listening.clear()
     
     def connect(self, peer_host, peer_port):
-        if (peer_host, peer_port) not in [
-            connection.getpeername() for connection in self.connections
-        ]:
+        connection_names = {
+            connection.getpeername(): connection for connection in self.connections
+        }
+        if (peer_host, peer_port) not in connection_names:
             connection = socket.create_connection((peer_host, peer_port))
             self.connections.add(connection)
             print(f"Connected to {peer_host}:{peer_port}")
             return connection
+        else:
+            return connection_names[(peer_host, peer_port)]
 
     def listen(self):
         self.socket.bind((self.host, self.port))
