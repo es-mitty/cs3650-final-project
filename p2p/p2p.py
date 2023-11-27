@@ -36,6 +36,7 @@ def main() -> None:
             source_peer: Peer = users[source]["peer"]
             connection  = source_peer.connect(CONNECTION_IPV4_ADD, users[dest]["port"])
             time.sleep(0.5)
+            print("Message sent to: " + dest)
             source_peer.send_data(get_img(), connection)
             time.sleep(0.5)
 
