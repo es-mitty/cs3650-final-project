@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import time
 
+from catapi import get_img
 from peer import Peer
 from typing import TypedDict
 
@@ -30,13 +31,12 @@ def main() -> None:
     while quit_demo != "quit":
         source = input("Type who you are: ")
         dest = input("Type who you want to send to: ")
-        message = "https://api.thecatapi.com/v1/images/search?api_key=live_pGPtu252IVJfrslX8KvUkqhFOmid15pf8qL7r2PqXiPlnEwYzg7JWGC2MZdwTW4u"
 
         if source in users and dest in users:
             source_peer: Peer = users[source]["peer"]
             connection  = source_peer.connect(CONNECTION_IPV4_ADD, users[dest]["port"])
             time.sleep(0.5)
-            source_peer.send_data(message, connection)
+            source_peer.send_data(get_img(), connection)
             time.sleep(0.5)
 
         quit_demo = input("Type quit to quit the demo or anything else to continue: ")

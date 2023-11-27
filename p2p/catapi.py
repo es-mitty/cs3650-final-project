@@ -6,7 +6,7 @@ class CatAPI:
     api_key = "live_pGPtu252IVJfrslX8KvUkqhFOmid15pf8qL7r2PqXiPlnEwYzg7JWGC2MZdwTW4u"
 
 def main():
-    get_img()
+    print(get_img())
 def get_img():
     url = "https://api.thecatapi.com/v1/images/search?api_key=live_pGPtu252IVJfrslX8KvUkqhFOmid15pf8qL7r2PqXiPlnEwYzg7JWGC2MZdwTW4u"
     myfile = requests.get(url)
@@ -18,9 +18,10 @@ def get_img():
     # https://www.geeksforgeeks.org/read-json-file-using-python/
     data = json.loads(file.read())  
     file.close()
-    print(data)
     cat_url = data[0].get("url")
     webbrowser.open(cat_url)
+    message = "Your image has been sent! Open your browser or click the link here: " + url
+    return message
 
 
 if __name__ == "__main__":
