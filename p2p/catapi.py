@@ -20,7 +20,7 @@ def get_img():
     file.close()
     cat_url = data[0].get("url")
     webbrowser.open(cat_url)
-    message = "Your image has been sent! Open your browser or click the link here: " + url
+    message = "Image transfer success! Open your browser or click the link here: " + url
     return message
 
 
