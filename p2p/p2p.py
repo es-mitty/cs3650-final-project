@@ -14,10 +14,10 @@ def main() -> None:
     ESTABLISHING_IPV4_ADDR = "0.0.0.0"
     CONNECTION_IPV4_ADD = "127.0.0.1"
     users: dict[str, UserEntry] = {
-        "anja": {"port": 8000, "peer": None},
-        "makayla": {"port": 8001, "peer": None},
-        "eli": {"port": 8002, "peer": None},
-        "murphy": {"port": 8003, "peer": None},
+        "Anja": {"port": 8000, "peer": None},
+        "Makayla": {"port": 8001, "peer": None},
+        "Eli": {"port": 8002, "peer": None},
+        "Murphy": {"port": 8003, "peer": None},
     }
 
     for user in users:
@@ -29,8 +29,10 @@ def main() -> None:
 
     quit_demo = "continue"
     while quit_demo != "quit":
-        source = input("Type who you are: ").lower()
+        source = input("Type who you are: ")
+        source = source[0].upper() + source[1:].lower()
         dest = input("Type who you want to send to: ").lower()
+        dest = dest[0].upper() + dest[1:].lower()
 
         if source in users and dest in users:
             source_peer: Peer = users[source]["peer"]
