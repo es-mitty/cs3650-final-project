@@ -3,7 +3,7 @@ import webbrowser, json, requests
 """Interface with the Cat API"""
 class CatAPI:
     global API_KEY
-    # this is the api key that on gets from signing up on thecatapi.com 
+    # this is the api key that on gets from signing up on thecatapi.com, you must register to get it
     API_KEY = "live_pGPtu252IVJfrslX8KvUkqhFOmid15pf8qL7r2PqXiPlnEwYzg7JWGC2MZdwTW4u"
 
 def get_img():
